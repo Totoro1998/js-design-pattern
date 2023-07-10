@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>矩形漏斗图</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="funnelCanvas" width="400" height="400"></canvas>
+
+    <script>
+      // 定义漏斗图数据
+      const funnelData = [
+        { label: '阶段 1', value: 100 },
+        { label: '阶段 2', value: 80 },
+        { label: '阶段 3', value: 60 },
+        { label: '阶段 4', value: 40 },
+        { label: '阶段 5', value: 20 },
+      ];
+
+      // 定义颜色
+      const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF'];
+
+      // 定义间距和梯形高度
+      const spacing = 10;
+      const trapezoidHeight = 20;
+
+      // 获取 canvas 元素
+      const canvas = document.getElementById('funnelCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // 计算矩形漏斗图的宽度和高度
+      const width = canvas.width;
+      const height = canvas.height;
+
+      // 绘制矩形漏斗图
+      function drawFunnel() {
+        ctx.clearRect(0, 0, width, height);
+
+        const total = funnelData.reduce((sum, data) => sum + data.value, 0);
+
+        let x = 0;
+        let y = 0;
+
+        for (let i = 0; i < funnelData.length; i++) {
+          const data = funnelData[i];
+          const percentage = data.value / total;
+
+          const rectangleWidth = width * (1 - i / funnelData.length);
+          const rectangleHeight = height * percentage;
+
+          const rectangleX = x + (width - rectangleWidth) / 2; // 计算矩形的水平位置
+          const rectangleY = y; // 计算矩形的垂直位置
+
+          ctx.fillStyle = colors[i % colors.length];
+          ctx.fillRect(rectangleX, rectangleY, rectangleWidth, rectangleHeight);
+
+          // 绘制梯形
+          if (i > 0) {
+            const prevRectangleWidth = width * (1 - (i - 1) / funnelData.length);
+            const prevRectangleY = y - spacing;
+
+            const trapezoidTopWidth = prevRectangleWidth;
+            const trapezoidBottomWidth = rectangleWidth;
+            const trapezoidX = x + (width - trapezoidBottomWidth) / 2;
+            const trapezoidY = prevRectangleY - trapezoidHeight;
+
+            ctx.beginPath();
+            ctx.moveTo(trapezoidX, trapezoidY);
+            ctx.lineTo(trapezoidX + trapezoidTopWidth, trapezoidY);
+            ctx.lineTo(trapezoidX + trapezoidBottomWidth, trapezoidY + trapezoidHeight);
+            ctx.lineTo(trapezoidX, trapezoidY + trapezoidHeight);
+            ctx.closePath();
+
+            ctx.fillStyle = colors[(i - 1) % colors.length];
+            ctx.fill();
+          }
+
+          // 显示数据
+          ctx.fillStyle = '#000000';
+          ctx.font = '12px Arial';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          const text = data.label + ': ' + data.value;
+          const textWidth = ctx.measureText(text).width;
+          const textX = rectangleX + rectangleWidth / 2;
+          const textY = rectangleY + rectangleHeight / 2;
+
+          ctx.fillText(text, textX, textY);
+
+          y += rectangleHeight + spacing;
+        }
+      }
+
+      drawFunnel();
+    </script>
+  </body>
+</html>
