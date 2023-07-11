@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button id="button1">点击按钮 1</button>
+      <button id="button2">点击按钮 2</button>
+      <button id="button3">点击按钮 3</button>
+    </div>
+    <script>
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+
+      var MenuBar = {
+        refresh: function () {
+          console.log("刷新菜单目录");
+        },
+      };
+      var RefreshMenuBarCommand = function (receiver) {
+        return {
+          execute: function () {
+            receiver.refresh();
+          },
+        };
+      };
+      var setCommand = function (button, command) {
+        button.onclick = function () {
+          command.execute();
+        };
+      };
+      var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
+      setCommand(button1, refreshMenuBarCommand);
+    </script>
+  </body>
+</html>
