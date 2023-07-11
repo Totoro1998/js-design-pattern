@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+      var myImage = (function () {
+        var imgNode = document.createElement("img");
+        document.body.appendChild(imgNode);
+        return {
+          setSrc: function (src) {
+            imgNode.src = src;
+          },
+        };
+      })();
+      myImage.setSrc(
+        "http:// imgcache.qq.com/music/photo/k/000GGDys0yA0Nk.jpg"
+      );
+    </script> -->
+
+    <script>
+      var myImage = (function () {
+        var imgNode = document.createElement("img");
+        document.body.appendChild(imgNode);
+        return {
+          setSrc: function (src) {
+            imgNode.src = src;
+          },
+        };
+      })();
+
+      /**
+       * 通过 proxyImage 间接地访问 MyImage。 proxyImage 控制了客户对 MyImage 的访问，
+       * 并且在此过程中加入一些额外的操作，比如在真正的图片加载好之前，
+       * 先把 img 节点的 src 设置为一张本地的 loading 图片
+       */
+      var proxyImage = (function () {
+        var img = new Image();
+        img.onload = function () {
+          myImage.setSrc(this.src);
+        };
+        return {
+          setSrc: function (src) {
+            myImage.setSrc("file:// /C:/Users/svenzeng/Desktop/loading.gif");
+            img.src = src;
+          },
+        };
+      })();
+      proxyImage.setSrc(
+        "http:// imgcache.qq.com/music/photo/k/000GGDys0yA0Nk.jpg"
+      );
+    </script>
+  </body>
+</html>

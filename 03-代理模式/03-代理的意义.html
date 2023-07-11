@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let MyImage = (function () {
+        let imgNode = document.createElement("img");
+        document.body.appendChild(imgNode);
+        let img = new Image();
+        img.onload = function () {
+          imgNode.src = img.src;
+        };
+        return {
+          setSrc: function (src) {
+            imgNode.src = "file:// /C:/Users/svenzeng/Desktop/loading.gif";
+            img.src = src;
+          },
+        };
+      })();
+      MyImage.setSrc(
+        "http:// imgcache.qq.com/music/photo/k/000GGDys0yA0Nk.jpg"
+      );
+    </script>
+  </body>
+</html>
