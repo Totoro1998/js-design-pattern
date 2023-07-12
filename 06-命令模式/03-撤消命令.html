@@ -15,7 +15,7 @@
     <button id="cancelBtn">cancel</button>
 
     <script>
-      var tween = {
+      let tween = {
         linear: function (t, b, c, d) {
           return (c * t) / d + b;
         },
@@ -36,7 +36,7 @@
         },
       };
 
-      var Animate = function (dom) {
+      let Animate = function (dom) {
         this.dom = dom; // 进行运动的 dom 节点
         this.startTime = 0; // 动画开始时间
         this.startPos = 0; // 动画开始时， dom 节点的位置，即 dom 的初始位置
@@ -58,8 +58,8 @@
         this.endPos = endPos; // dom 节点目标位置
         this.duration = duration; // 动画持续事件
         this.easing = tween[easing]; // 缓动算法
-        var self = this;
-        var timeId = setInterval(function () {
+        let self = this;
+        let timeId = setInterval(function () {
           // 启动定时器，开始执行动画
           if (self.step() === false) {
             // 如果动画已结束，则清除定时器
@@ -68,13 +68,13 @@
         }, 19);
       };
       Animate.prototype.step = function () {
-        var t = +new Date(); // 取得当前时间
+        let t = +new Date(); // 取得当前时间
         if (t >= this.startTime + this.duration) {
           // (1)
           this.update(this.endPos); // 更新小球的 CSS 属性值
           return false;
         }
-        var pos = this.easing(
+        let pos = this.easing(
           t - this.startTime,
           this.startPos,
           this.endPos - this.startPos,
@@ -88,21 +88,13 @@
         this.dom.style[this.propertyName] = pos + "px";
       };
     </script>
-
     <script>
-      var setCommand = function (button, command) {
-        button.onclick = function () {
-          command.execute();
-        };
-      };
-    </script>
-    <script>
-      var ball = document.getElementById("ball");
-      var pos = document.getElementById("pos");
-      var moveBtn = document.getElementById("moveBtn");
-      var cancelBtn = document.getElementById("cancelBtn");
+      let ball = document.getElementById("ball");
+      let pos = document.getElementById("pos");
+      let moveBtn = document.getElementById("moveBtn");
+      let cancelBtn = document.getElementById("cancelBtn");
 
-      var MoveCommand = function (receiver, pos) {
+      let MoveCommand = function (receiver, pos) {
         this.receiver = receiver;
         this.pos = pos;
         this.oldPos = null;
@@ -111,6 +103,7 @@
         this.receiver.start("left", this.pos, 1000, "strongEaseOut");
         this.oldPos =
           this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName];
+
         // 记录小球开始移动前的位置
       };
       //   撤消命令
@@ -118,10 +111,10 @@
         this.receiver.start("left", this.oldPos, 1000, "strongEaseOut");
         // 回到小球移动前记录的位置
       };
-      var moveCommand;
 
+      let moveCommand;
       moveBtn.onclick = function () {
-        var animate = new Animate(ball);
+        const animate = new Animate(ball);
         moveCommand = new MoveCommand(animate, pos.value);
         moveCommand.execute();
       };
