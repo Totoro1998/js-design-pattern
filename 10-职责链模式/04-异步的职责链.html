@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Chain.prototype.setNextSuccessor 指定在链中的下一个节点
+      // Chain.prototype.passRequest 传递请求给某个节点
+      var Chain = function (fn) {
+        this.fn = fn;
+        this.successor = null; //表示在链中的下一个节点。
+      };
+      Chain.prototype.setNextSuccessor = function (successor) {
+        return (this.successor = successor);
+      };
+      Chain.prototype.passRequest = function () {
+        var ret = this.fn.apply(this, arguments);
+        if (ret === "nextSuccessor") {
+          return (
+            this.successor &&
+            this.successor.passRequest.apply(this.successor, arguments)
+          );
+        }
+        return ret;
+      };
+      // 手动传递请求给职责链中的下一个节点
+      Chain.prototype.next = function () {
+        return (
+          this.successor &&
+          this.successor.passRequest.apply(this.successor, arguments)
+        );
+      };
+    </script>
+
+    <script>
+      var fn1 = new Chain(function () {
+        console.log(1);
+        return "nextSuccessor";
+      });
+      var fn2 = new Chain(function () {
+        console.log(2);
+        var self = this;
+        setTimeout(function () {
+          self.next();
+        }, 1000);
+      });
+      var fn3 = new Chain(function () {
+        console.log(3);
+      });
+      fn1.setNextSuccessor(fn2).setNextSuccessor(fn3);
+      fn1.passRequest();
+    </script>
+  </body>
+</html>
