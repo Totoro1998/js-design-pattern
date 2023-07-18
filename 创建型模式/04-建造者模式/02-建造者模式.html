@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <!-- 
+    假设我们正在构建一个在线商城的产品详情页组件。
+    该组件包含商品图片、商品标题、商品描述、价格等多个部分，并且可以根据用户的需求来选择是否显示额外的推荐商品部分。
+   -->
+  <script>
+    // 产品详情页组件
+    class ProductDetail {
+      constructor() {
+        this.image = "";
+        this.title = "";
+        this.description = "";
+        this.price = 0;
+        this.recommendedProducts = [];
+      }
+
+      // 设置商品图片
+      setImage(image) {
+        this.image = image;
+      }
+
+      // 设置商品标题
+      setTitle(title) {
+        this.title = title;
+      }
+
+      // 设置商品描述
+      setDescription(description) {
+        this.description = description;
+      }
+
+      // 设置价格
+      setPrice(price) {
+        this.price = price;
+      }
+
+      // 设置推荐商品
+      setRecommendedProducts(recommendedProducts) {
+        this.recommendedProducts = recommendedProducts;
+      }
+
+      // 显示产品详情
+      show() {
+        console.log("Product Image:", this.image);
+        console.log("Product Title:", this.title);
+        console.log("Product Description:", this.description);
+        console.log("Product Price:", this.price);
+        console.log("Recommended Products:", this.recommendedProducts);
+      }
+    }
+
+    // 产品详情页组件建造者接口
+    class ProductDetailBuilder {
+      constructor() {
+        this.productDetail = new ProductDetail();
+      }
+
+      // 构建商品图片
+      buildImage(image) {}
+
+      // 构建商品标题
+      buildTitle(title) {}
+
+      // 构建商品描述
+      buildDescription(description) {}
+
+      // 构建价格
+      buildPrice(price) {}
+
+      // 构建推荐商品
+      buildRecommendedProducts(recommendedProducts) {}
+
+      // 获取最终构建的产品详情页组件
+      getProductDetail() {
+        return this.productDetail;
+      }
+    }
+
+    // 具体的产品详情页组件建造者
+    class ConcreteProductDetailBuilder extends ProductDetailBuilder {
+      buildImage(image) {
+        this.productDetail.setImage(image);
+      }
+
+      buildTitle(title) {
+        this.productDetail.setTitle(title);
+      }
+
+      buildDescription(description) {
+        this.productDetail.setDescription(description);
+      }
+
+      buildPrice(price) {
+        this.productDetail.setPrice(price);
+      }
+
+      buildRecommendedProducts(recommendedProducts) {
+        this.productDetail.setRecommendedProducts(recommendedProducts);
+      }
+    }
+
+    // 产品详情页组件指挥者,负责指导产品详情页组件的构建过程
+    class ProductDetailDirector {
+      construct(builder) {
+        builder.buildImage("product-image.jpg");
+        builder.buildTitle("Product Title");
+        builder.buildDescription("Product Description");
+        builder.buildPrice(99.99);
+        builder.buildRecommendedProducts([
+          "Product 1",
+          "Product 2",
+          "Product 3",
+        ]);
+      }
+    }
+
+    // 使用建造者模式构建产品详情页组件
+    const builder = new ConcreteProductDetailBuilder();
+    const director = new ProductDetailDirector();
+    director.construct(builder);
+    const productDetail = builder.getProductDetail();
+
+    // 显示产品详情页组件
+    productDetail.show();
+  </script>
+</html>

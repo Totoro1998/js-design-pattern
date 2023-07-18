@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    class BurgerBuilder {
+      constructor(size) {
+        this.size = size;
+      }
+
+      addPepperoni() {
+        this.pepperoni = true;
+        return this;
+      }
+
+      addLettuce() {
+        this.lettuce = true;
+        return this;
+      }
+
+      addCheeze() {
+        this.cheeze = true;
+        return this;
+      }
+
+      addTomato() {
+        this.tomato = true;
+        return this;
+      }
+
+      build() {
+        return new Burger(this);
+      }
+    }
+  </script>
+
+  <script>
+    const burger = new BurgerBuilder(14)
+      .addPepperoni()
+      .addLettuce()
+      .addTomato()
+      .build();
+  </script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    // 原型对象
+    const personPrototype = {
+      name: "",
+      age: 0,
+      greet: function () {
+        console.log(
+          `Hello, my name is ${this.name} and I'm ${this.age} years old.`
+        );
+      },
+    };
+
+    // 创建新对象
+    const person1 = Object.create(personPrototype);
+    person1.name = "Alice";
+    person1.age = 25;
+
+    const person2 = Object.create(personPrototype);
+    person2.name = "Bob";
+    person2.age = 30;
+
+    // 测试
+    person1.greet(); // 输出：Hello, my name is Alice and I'm 25 years old.
+    person2.greet(); // 输出：Hello, my name is Bob and I'm 30 years old.
+  </script>
+</html>

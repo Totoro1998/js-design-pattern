@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // 抽象产品类
+    class Button {
+      constructor() {
+        this.element = document.createElement("button");
+      }
+
+      render() {
+        document.body.appendChild(this.element);
+      }
+    }
+
+    // 具体产品类
+    class RectangleButton extends Button {
+      constructor() {
+        super();
+        this.element.innerHTML = "Rectangle Button";
+        this.element.style.padding = "10px 20px";
+      }
+    }
+
+    class CircleButton extends Button {
+      constructor() {
+        super();
+        this.element.innerHTML = "Circle Button";
+        this.element.style.padding = "8px";
+        this.element.style.borderRadius = "50%";
+      }
+    }
+
+    // 工厂类
+    class ButtonFactory {
+      createButton(type) {
+        let button;
+        if (type === "rectangle") {
+          button = new RectangleButton();
+        } else if (type === "circle") {
+          button = new CircleButton();
+        }
+        return button;
+      }
+    }
+  </script>
+
+  <script>
+    // 客户端代码
+    const factory = new ButtonFactory();
+
+    const rectangleButton = factory.createButton("rectangle");
+    rectangleButton.render();
+
+    const circleButton = factory.createButton("circle");
+    circleButton.render();
+  </script>
+</html>
