@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    // 实现部分接口 - 主题
+    class Theme {
+      applyTheme() {
+        throw new Error("This method should be overridden");
+      }
+    }
+
+    // 具体实现部分 - 浅色主题
+    class LightTheme extends Theme {
+      applyTheme() {
+        console.log("Applying light theme");
+      }
+    }
+
+    // 具体实现部分 - 深色主题
+    class DarkTheme extends Theme {
+      applyTheme() {
+        console.log("Applying dark theme");
+      }
+    }
+
+    // 实现部分接口 - 样式
+    class Style {
+      applyStyle() {
+        throw new Error("This method should be overridden");
+      }
+    }
+
+    // 具体实现部分 - 圆形样式
+    class CircleStyle extends Style {
+      applyStyle() {
+        console.log("Applying circle style");
+      }
+    }
+
+    // 具体实现部分 - 方形样式
+    class SquareStyle extends Style {
+      applyStyle() {
+        console.log("Applying square style");
+      }
+    }
+
+    // 抽象部分 - 组件
+    class Component {
+      constructor(theme, style) {
+        this.theme = theme;
+        this.style = style;
+      }
+
+      render() {
+        this.theme.applyTheme();
+        this.style.applyStyle();
+        console.log("Rendering component");
+      }
+    }
+
+    // 具体抽象部分 - 按钮
+    class Button extends Component {
+      constructor(theme, style) {
+        super(theme, style);
+      }
+    }
+
+    // 具体抽象部分 - 下拉菜单
+    class Dropdown extends Component {
+      constructor(theme, style) {
+        super(theme, style);
+      }
+    }
+
+    // 使用示例
+    const lightTheme = new LightTheme();
+    const darkTheme = new DarkTheme();
+    const circleStyle = new CircleStyle();
+    const squareStyle = new SquareStyle();
+
+    const lightCircleButton = new Button(lightTheme, circleStyle);
+    lightCircleButton.render();
+
+    const darkSquareDropdown = new Dropdown(darkTheme, squareStyle);
+    darkSquareDropdown.render();
+  </script>
+</html>

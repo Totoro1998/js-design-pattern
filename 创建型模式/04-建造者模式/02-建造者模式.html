@@ -12,6 +12,7 @@
     该组件包含商品图片、商品标题、商品描述、价格等多个部分，并且可以根据用户的需求来选择是否显示额外的推荐商品部分。
    -->
   <script>
+    // 产品
     // 产品详情页组件
     class ProductDetail {
       constructor() {
@@ -57,6 +58,7 @@
       }
     }
 
+    // 建造者
     // 产品详情页组件建造者接口
     class ProductDetailBuilder {
       constructor() {
@@ -84,6 +86,7 @@
       }
     }
 
+    // 具体建造者
     // 具体的产品详情页组件建造者
     class ConcreteProductDetailBuilder extends ProductDetailBuilder {
       buildImage(image) {
@@ -107,6 +110,7 @@
       }
     }
 
+    // 指挥者
     // 产品详情页组件指挥者,负责指导产品详情页组件的构建过程
     class ProductDetailDirector {
       construct(builder) {

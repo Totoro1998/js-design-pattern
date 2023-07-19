@@ -6,45 +6,62 @@
     <title>Document</title>
   </head>
   <body></body>
-
   <script>
-    class Developer {
-      askQuestions() {
-        console.log("Asking about design patterns!");
+    // 抽象产品
+    class Product {
+      constructor() {
+        this.name = "";
+      }
+
+      getName() {
+        return this.name;
       }
     }
 
-    class CommunityExecutive {
-      askQuestions() {
-        console.log("Asking about community building");
+    // 具体产品 A
+    class ConcreteProductA extends Product {
+      constructor() {
+        super();
+        this.name = "Product A";
       }
     }
 
-    class HiringManager {
-      takeInterview() {
-        const interviewer = this.makeInterviewer();
-        interviewer.askQuestions();
+    // 具体产品 B
+    class ConcreteProductB extends Product {
+      constructor() {
+        super();
+        this.name = "Product B";
       }
     }
 
-    class DevelopmentManager extends HiringManager {
-      makeInterviewer() {
-        return new Developer();
+    // 抽象工厂
+    class Factory {
+      createProduct() {
+        throw new Error("createProduct method must be implemented");
       }
     }
 
-    class MarketingManager extends HiringManager {
-      makeInterviewer() {
-        return new CommunityExecutive();
+    // 具体工厂 A
+    class ConcreteFactoryA extends Factory {
+      createProduct() {
+        return new ConcreteProductA();
       }
     }
-  </script>
 
-  <script>
-    const devManager = new DevelopmentManager();
-    devManager.takeInterview(); // Output: Asking about design patterns
+    // 具体工厂 B
+    class ConcreteFactoryB extends Factory {
+      createProduct() {
+        return new ConcreteProductB();
+      }
+    }
 
-    const marketingManager = new MarketingManager();
-    marketingManager.takeInterview(); // Output: Asking about community building.
+    // 客户端代码
+    const factoryA = new ConcreteFactoryA();
+    const productA = factoryA.createProduct();
+    console.log(productA.getName()); // Output: Product A
+
+    const factoryB = new ConcreteFactoryB();
+    const productB = factoryB.createProduct();
+    console.log(productB.getName()); // Output: Product B
   </script>
 </html>
