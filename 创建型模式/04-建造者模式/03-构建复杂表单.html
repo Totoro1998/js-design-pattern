@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    // 表单字段
+    class FormField {
+      constructor(label, type, required) {
+        this.label = label;
+        this.type = type;
+        this.required = required;
+      }
+    }
+
+    // 表单字段验证规则
+    class FormFieldValidator {
+      constructor(field, validators) {
+        this.field = field;
+        this.validators = validators;
+      }
+    }
+  </script>
+
+  <script>
+    // 具体建造者
+    class FormBuilder {
+      constructor() {
+        this.fields = [];
+      }
+
+      // 添加表单字段
+      addField(label, type, required, validators = []) {
+        const field = new FormField(label, type, required);
+        this.fields.push(new FormFieldValidator(field, validators));
+      }
+
+      // 获取最终构建的表单
+      getForm() {
+        return this.fields;
+      }
+    }
+  </script>
+
+  <script>
+    // 使用建造者模式构建复杂表单
+    const formBuilder = new FormBuilder();
+    formBuilder.addField("用户名", "text", true, [
+      // 添加用户名验证规则
+      { type: "minLength", value: 6 },
+      { type: "maxLength", value: 20 },
+      { type: "regex", value: /^[a-zA-Z0-9]+$/ },
+    ]);
+
+    formBuilder.addField("电子邮件", "email", true, [
+      // 添加电子邮件验证规则
+      { type: "email" },
+    ]);
+
+    formBuilder.addField("密码", "password", true, [
+      // 添加密码验证规则
+      { type: "minLength", value: 8 },
+      {
+        type: "regex",
+        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+      },
+    ]);
+
+    // 获取最终构建的表单
+    const formFields = formBuilder.getForm();
+
+    // 显示表单字段信息
+    formFields.forEach((field) => {
+      console.log("Field Label:", field.field.label);
+      console.log("Field Type:", field.field.type);
+      console.log("Field Required:", field.field.required);
+      console.log("Field Validators:", field.validators);
+      console.log("------------------------");
+    });
+  </script>
+</html>
