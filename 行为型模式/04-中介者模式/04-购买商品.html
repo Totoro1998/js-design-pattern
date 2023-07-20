@@ -21,19 +21,19 @@
     <button id="nextBtn" disabled="true">请选择手机颜色和购买数量</button>
   </body>
   <script>
-    var colorSelect = document.getElementById("colorSelect"),
+    let colorSelect = document.getElementById("colorSelect"),
       numberInput = document.getElementById("numberInput"),
       colorInfo = document.getElementById("colorInfo"),
       numberInfo = document.getElementById("numberInfo"),
       nextBtn = document.getElementById("nextBtn");
 
-    var goods = {
+    let goods = {
       // 手机库存
       red: 3,
       blue: 6,
     };
     colorSelect.onchange = function () {
-      var color = this.value, // 颜色
+      let color = this.value, // 颜色
         number = numberInput.value, // 数量
         stock = goods[color]; // 该颜色手机对应的当前库存
       colorInfo.innerHTML = color;

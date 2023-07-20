@@ -7,8 +7,8 @@
   </head>
   <body>
     <script>
-      var StateFactory = (function () {
-        var State = function () {};
+      let StateFactory = (function () {
+        let State = function () {};
         State.prototype.clickHandler1 = function () {
           throw new Error("子类必须重写父类的 clickHandler1 方法");
         };
@@ -16,11 +16,11 @@
           throw new Error("子类必须重写父类的 clickHandler2 方法");
         };
         return function (param) {
-          var F = function (uploadObj) {
+          let F = function (uploadObj) {
             this.uploadObj = uploadObj;
           };
           F.prototype = new State();
-          for (var i in param) {
+          for (let i in param) {
             F.prototype[i] = param[i];
           }
           return F;
@@ -33,8 +33,8 @@
       window.external.upload = function (state) {
         console.log(state); // 可能为 sign、 uploading、 done、 error
       };
-      var plugin = (function () {
-        var plugin = document.createElement("embed");
+      let plugin = (function () {
+        let plugin = document.createElement("embed");
         plugin.style.display = "none";
         plugin.type = "application/txftn-webkit";
         plugin.sign = function () {
@@ -59,7 +59,7 @@
 
     <!-- 第二步，改造 Upload 构造函数，在构造函数中为每种状态子类都创建一个实例对象 -->
     <script>
-      var Upload = function (fileName) {
+      let Upload = function (fileName) {
         this.plugin = plugin;
         this.fileName = fileName;
         this.button1 = null;
@@ -73,7 +73,7 @@
       };
 
       Upload.prototype.init = function () {
-        var that = this;
+        let that = this;
         this.dom = document.createElement("div");
         this.dom.innerHTML =
           "<span>文件名称:" +
@@ -89,7 +89,7 @@
 
       //   负责具体的按钮事件实现，在点击了按钮之后， Context 并不做任何具体的操作，而是把请求委托给当前的状态类来执行;
       Upload.prototype.bindEvent = function () {
-        var self = this;
+        let self = this;
         this.button1.onclick = function () {
           self.currState.clickHandler1();
         };
@@ -130,7 +130,7 @@
 
     <!-- 编写各个状态类的实现 -->
     <script>
-      var SignState = StateFactory({
+      let SignState = StateFactory({
         clickHandler1: function () {
           console.log("扫描中，点击无效...");
         },
@@ -138,7 +138,7 @@
           console.log("文件正在上传中，不能删除");
         },
       });
-      var UploadingState = StateFactory({
+      let UploadingState = StateFactory({
         clickHandler1: function () {
           this.uploadObj.pause();
         },
@@ -146,7 +146,7 @@
           console.log("文件正在上传中，不能删除");
         },
       });
-      var PauseState = StateFactory({
+      let PauseState = StateFactory({
         clickHandler1: function () {
           this.uploadObj.uploading();
         },
@@ -154,7 +154,7 @@
           this.uploadObj.del();
         },
       });
-      var DoneState = StateFactory({
+      let DoneState = StateFactory({
         clickHandler1: function () {
           console.log("文件已完成上传, 点击无效");
         },
@@ -162,7 +162,7 @@
           this.uploadObj.del();
         },
       });
-      var ErrorState = StateFactory({
+      let ErrorState = StateFactory({
         clickHandler1: function () {
           console.log("文件上传失败, 点击无效");
         },
@@ -174,7 +174,7 @@
 
     <!-- 测试 -->
     <script>
-      var uploadObj = new Upload("JavaScript 设计模式与开发实践");
+      let uploadObj = new Upload("JavaScript 设计模式与开发实践");
       uploadObj.init();
       window.external.upload = function (state) {
         uploadObj[state]();

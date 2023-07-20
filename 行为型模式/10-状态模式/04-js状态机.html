@@ -7,7 +7,7 @@
   </head>
   <body>
     <script>
-      var delegate = function (client, delegation) {
+      let delegate = function (client, delegation) {
         return {
           buttonWasPressed: function () {
             // 将客户的操作委托给 delegation 对象
@@ -15,7 +15,7 @@
           },
         };
       };
-      var FSM = {
+      let FSM = {
         off: {
           buttonWasPressed: function () {
             console.log("关灯");
@@ -31,14 +31,14 @@
           },
         },
       };
-      var Light = function () {
+      let Light = function () {
         this.offState = delegate(this, FSM.off);
         this.onState = delegate(this, FSM.on);
         this.currState = this.offState; // 设置初始状态为关闭状态
         this.button = null;
       };
       Light.prototype.init = function () {
-        var button = document.createElement("button"),
+        let button = document.createElement("button"),
           self = this;
         button.innerHTML = "已关灯";
         this.button = document.body.appendChild(button);
@@ -46,7 +46,7 @@
           self.currState.buttonWasPressed();
         };
       };
-      var light = new Light();
+      let light = new Light();
       light.init();
     </script>
   </body>

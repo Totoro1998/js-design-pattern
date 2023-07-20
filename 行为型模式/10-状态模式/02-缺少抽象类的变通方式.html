@@ -7,11 +7,11 @@
   </head>
   <body>
     <script>
-      var State = function () {};
+      let State = function () {};
       State.prototype.buttonWasPressed = function () {
         throw new Error("父类的 buttonWasPressed 方法必须被重写");
       };
-      var SuperStrongLightState = function (light) {
+      let SuperStrongLightState = function (light) {
         this.light = light;
       };
       SuperStrongLightState.prototype = new State(); // 继承抽象父类

@@ -8,7 +8,7 @@
   <body>
     <script>
       Function.prototype.before = function (beforefn) {
-        var __self = this; // 保存原函数的引用
+        let __self = this; // 保存原函数的引用
         return function () {
           // 返回包含了原函数和新函数的"代理"函数
           beforefn.apply(this, arguments); // 执行新函数，且保证 this 不被劫持，新函数接受的参数
@@ -18,20 +18,20 @@
         };
       };
       Function.prototype.after = function (afterfn) {
-        var __self = this;
+        let __self = this;
         return function () {
-          var ret = __self.apply(this, arguments);
+          let ret = __self.apply(this, arguments);
           afterfn.apply(this, arguments);
           return ret;
         };
       };
     </script>
     <script>
-      var ajax = function (type, url, param) {
+      let ajax = function (type, url, param) {
         console.log(param); // 发送 ajax 请求的代码略
       };
 
-      var getToken = function () {
+      let getToken = function () {
         return "Token";
       };
       ajax = ajax.before(function (type, url, param) {

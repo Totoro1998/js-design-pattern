@@ -7,12 +7,12 @@
   </head>
   <body>
     <script>
-      var Event = (function () {
-        var global = this,
+      let Event = (function () {
+        let global = this,
           Event,
           _default = "default";
         Event = (function () {
-          var _listen,
+          let _listen,
             _trigger,
             _remove,
             _slice = Array.prototype.slice,
@@ -22,9 +22,9 @@
             _create,
             find,
             each = function (ary, fn) {
-              var ret;
-              for (var i = 0, l = ary.length; i < l; i++) {
-                var n = ary[i];
+              let ret;
+              for (let i = 0, l = ary.length; i < l; i++) {
+                let n = ary[i];
                 ret = fn.call(n, i, n);
               }
               return ret;
@@ -38,7 +38,7 @@
           _remove = function (key, cache, fn) {
             if (cache[key]) {
               if (fn) {
-                for (var i = cache[key].length; i >= 0; i--) {
+                for (let i = cache[key].length; i >= 0; i--) {
                   if (cache[key][i] === fn) {
                     cache[key].splice(i, 1);
                   }
@@ -49,7 +49,7 @@
             }
           };
           _trigger = function () {
-            var cache = _shift.call(arguments),
+            let cache = _shift.call(arguments),
               key = _shift.call(arguments),
               args = arguments,
               _self = this,
@@ -63,8 +63,8 @@
             });
           };
           _create = function (namespace) {
-            var namespace = namespace || _default;
-            var cache = {},
+            let namespace = namespace || _default;
+            let cache = {},
               offlineStack = [], // 离线事件
               ret = {
                 listen: function (key, fn, last) {
@@ -89,7 +89,7 @@
                   _remove(key, cache, fn);
                 },
                 trigger: function () {
-                  var fn,
+                  let fn,
                     args,
                     _self = this;
                   _unshift.call(arguments, cache);
@@ -112,19 +112,19 @@
           return {
             create: _create,
             one: function (key, fn, last) {
-              var event = this.create();
+              let event = this.create();
               event.one(key, fn, last);
             },
             remove: function (key, fn) {
-              var event = this.create();
+              let event = this.create();
               event.remove(key, fn);
             },
             listen: function (key, fn, last) {
-              var event = this.create();
+              let event = this.create();
               event.listen(key, fn, last);
             },
             trigger: function () {
-              var event = this.create();
+              let event = this.create();
               event.trigger.apply(this, arguments);
             },
           };

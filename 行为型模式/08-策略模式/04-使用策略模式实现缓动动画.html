@@ -8,7 +8,7 @@
   <body>
     <div style="position: absolute; background: blue" id="div">我是 div</div>
     <script>
-      var tween = {
+      let tween = {
         linear: function (t, b, c, d) {
           return (c * t) / d + b;
         },
@@ -29,7 +29,7 @@
         },
       };
 
-      var Animate = function (dom) {
+      let Animate = function (dom) {
         this.dom = dom; // 进行运动的 dom 节点
         this.startTime = 0; // 动画开始时间
         this.startPos = 0; // 动画开始时， dom 节点的位置，即 dom 的初始位置
@@ -51,8 +51,8 @@
         this.endPos = endPos; // dom 节点目标位置
         this.duration = duration; // 动画持续事件
         this.easing = tween[easing]; // 缓动算法
-        var self = this;
-        var timeId = setInterval(function () {
+        let self = this;
+        let timeId = setInterval(function () {
           // 启动定时器，开始执行动画
           if (self.step() === false) {
             // 如果动画已结束，则清除定时器
@@ -61,13 +61,13 @@
         }, 19);
       };
       Animate.prototype.step = function () {
-        var t = +new Date(); // 取得当前时间
+        let t = +new Date(); // 取得当前时间
         if (t >= this.startTime + this.duration) {
           // (1)
           this.update(this.endPos); // 更新小球的 CSS 属性值
           return false;
         }
-        var pos = this.easing(
+        let pos = this.easing(
           t - this.startTime,
           this.startPos,
           this.endPos - this.startPos,
@@ -82,8 +82,8 @@
       };
 
       // 测试
-      var div = document.getElementById("div");
-      var animate = new Animate(div);
+      let div = document.getElementById("div");
+      let animate = new Animate(div);
       animate.start("left", 500, 1000, "strongEaseOut");
       // animate.start( 'top', 1500, 500, 'strongEaseIn' );
     </script>

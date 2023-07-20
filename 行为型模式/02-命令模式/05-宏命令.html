@@ -7,36 +7,36 @@
   </head>
   <body>
     <script>
-      var closeDoorCommand = {
+      let closeDoorCommand = {
         execute: function () {
           console.log("关门");
         },
       };
-      var openPcCommand = {
+      let openPcCommand = {
         execute: function () {
           console.log("开电脑");
         },
       };
-      var openQQCommand = {
+      let openQQCommand = {
         execute: function () {
           console.log("登录 QQ");
         },
       };
 
-      var MacroCommand = function () {
+      let MacroCommand = function () {
         return {
           commandsList: [],
           add: function (command) {
             this.commandsList.push(command);
           },
           execute: function () {
-            for (var i = 0, command; (command = this.commandsList[i++]); ) {
+            for (let i = 0, command; (command = this.commandsList[i++]); ) {
               command.execute();
             }
           },
         };
       };
-      var macroCommand = MacroCommand();
+      let macroCommand = MacroCommand();
       macroCommand.add(closeDoorCommand);
       macroCommand.add(openPcCommand);
       macroCommand.add(openQQCommand);

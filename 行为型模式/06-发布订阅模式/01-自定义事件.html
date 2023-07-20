@@ -7,7 +7,7 @@
   </head>
   <body>
     <script>
-      var salesOffices = {}; // 定义售楼处
+      let salesOffices = {}; // 定义售楼处
       salesOffices.clientList = []; // 缓存列表，存放订阅者的回调函数
       salesOffices.listen = function (fn) {
         // 增加订阅者
@@ -16,7 +16,7 @@
 
       salesOffices.trigger = function () {
         // 发布消息
-        for (var i = 0, fn; (fn = this.clientList[i++]); ) {
+        for (let i = 0, fn; (fn = this.clientList[i++]); ) {
           fn.apply(this, arguments); // (2) // arguments 是发布消息时带上的参数
         }
       };

@@ -7,14 +7,14 @@
   </head>
   <body>
     <script>
-      var Flower = function () {};
-      var xiaoming = {
+      let Flower = function () {};
+      let xiaoming = {
         sendFlower: function (target) {
-          var flower = new Flower();
+          let flower = new Flower();
           target.receiveFlower(flower);
         },
       };
-      var A = {
+      let A = {
         receiveFlower: function (flower) {
           console.log("收到花 " + flower);
         },
@@ -23,19 +23,19 @@
     </script>
 
     <script>
-      var Flower = function () {};
-      var xiaoming = {
+      let Flower = function () {};
+      let xiaoming = {
         sendFlower: function (target) {
-          var flower = new Flower();
+          let flower = new Flower();
           target.receiveFlower(flower);
         },
       };
-      var B = {
+      let B = {
         receiveFlower: function (flower) {
           A.receiveFlower(flower);
         },
       };
-      var A = {
+      let A = {
         receiveFlower: function (flower) {
           console.log("收到花 " + flower);
         },

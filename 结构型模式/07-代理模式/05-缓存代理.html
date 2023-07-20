@@ -7,10 +7,10 @@
   </head>
   <body>
     <script>
-      var mult = function () {
+      let mult = function () {
         console.log("开始计算乘积");
-        var a = 1;
-        for (var i = 0, l = arguments.length; i < l; i++) {
+        let a = 1;
+        for (let i = 0, l = arguments.length; i < l; i++) {
           a = a * arguments[i];
         }
         return a;
@@ -18,10 +18,10 @@
       mult(2, 3); // 输出： 6
       mult(2, 3, 4); // 输出： 24
 
-      var proxyMult = (function () {
-        var cache = {};
+      let proxyMult = (function () {
+        let cache = {};
         return function () {
-          var args = Array.prototype.join.call(arguments, ",");
+          let args = Array.prototype.join.call(arguments, ",");
           if (args in cache) {
             return cache[args];
           }

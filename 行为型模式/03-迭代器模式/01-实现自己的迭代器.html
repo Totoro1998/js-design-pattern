@@ -7,8 +7,8 @@
   </head>
   <body>
     <script>
-      var each = function (ary, callback) {
-        for (var i = 0, l = ary.length; i < l; i++) {
+      let each = function (ary, callback) {
+        for (let i = 0, l = ary.length; i < l; i++) {
           callback.call(ary[i], i, ary[i]); // 把下标和元素当作参数传给 callback 函数
         }
       };

@@ -10,7 +10,7 @@
 
     <script>
       Function.prototype.before = function (beforefn) {
-        var __self = this; // 保存原函数的引用
+        let __self = this; // 保存原函数的引用
         return function () {
           // 返回包含了原函数和新函数的"代理"函数
           beforefn.apply(this, arguments); // 执行新函数，且保证 this 不被劫持，新函数接受的参数
@@ -20,19 +20,19 @@
         };
       };
       Function.prototype.after = function (afterfn) {
-        var __self = this;
+        let __self = this;
         return function () {
-          var ret = __self.apply(this, arguments);
+          let ret = __self.apply(this, arguments);
           afterfn.apply(this, arguments);
           return ret;
         };
       };
     </script>
     <script>
-      var showLogin = function () {
+      let showLogin = function () {
         console.log("打开登录浮层");
       };
-      var log = function () {
+      let log = function () {
         console.log("上报标签为: " + this.getAttribute("tag"));
       };
       showLogin = showLogin.after(log); // 打开登录浮层之后上报数据

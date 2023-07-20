@@ -7,7 +7,7 @@
   </head>
   <body>
     <script>
-      var salesOffices = {}; // 定义售楼处
+      let salesOffices = {}; // 定义售楼处
       salesOffices.clientList = {}; // 缓存列表，存放订阅者的回调函数
       salesOffices.listen = function (key, fn) {
         if (!this.clientList[key]) {
@@ -18,13 +18,13 @@
       };
       salesOffices.trigger = function () {
         // 发布消息
-        var key = Array.prototype.shift.call(arguments), // 取出消息类型
+        let key = Array.prototype.shift.call(arguments), // 取出消息类型
           fns = this.clientList[key]; // 取出该消息对应的回调函数集合
         if (!fns || fns.length === 0) {
           // 如果没有订阅该消息，则返回
           return false;
         }
-        for (var i = 0, fn; (fn = fns[i++]); ) {
+        for (let i = 0, fn; (fn = fns[i++]); ) {
           fn.apply(this, arguments); // (2) // arguments 是发布消息时附送的参数
         }
       };

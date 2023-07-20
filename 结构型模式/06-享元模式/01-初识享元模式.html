@@ -7,21 +7,21 @@
   </head>
   <body>
     <script>
-      var Model = function (sex) {
+      let Model = function (sex) {
         this.sex = sex;
       };
       Model.prototype.takePhoto = function () {
         console.log("sex= " + this.sex + " underwear=" + this.underwear);
       };
 
-      var maleModel = new Model("male"),
+      let maleModel = new Model("male"),
         femaleModel = new Model("female");
 
-      for (var i = 1; i <= 50; i++) {
+      for (let i = 1; i <= 50; i++) {
         maleModel.underwear = "underwear" + i;
         maleModel.takePhoto();
       }
-      for (var j = 1; j <= 50; j++) {
+      for (let j = 1; j <= 50; j++) {
         femaleModel.underwear = "underwear" + j;
         femaleModel.takePhoto();
       }

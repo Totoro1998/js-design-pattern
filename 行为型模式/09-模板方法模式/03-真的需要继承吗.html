@@ -7,26 +7,26 @@
   </head>
   <body>
     <script>
-      var Beverage = function (param) {
-        var boilWater = function () {
+      let Beverage = function (param) {
+        let boilWater = function () {
           console.log("把水煮沸");
         };
-        var brew =
+        let brew =
           param.brew ||
           function () {
             throw new Error("必须传递 brew 方法");
           };
-        var pourInCup =
+        let pourInCup =
           param.pourInCup ||
           function () {
             throw new Error("必须传递 pourInCup 方法");
           };
-        var addCondiments =
+        let addCondiments =
           param.addCondiments ||
           function () {
             throw new Error("必须传递 addCondiments 方法");
           };
-        var F = function () {};
+        let F = function () {};
         F.prototype.init = function () {
           boilWater();
           brew();
@@ -38,7 +38,7 @@
     </script>
 
     <script>
-      var Coffee = Beverage({
+      let Coffee = Beverage({
         brew: function () {
           console.log("用沸水冲泡咖啡");
         },
@@ -50,7 +50,7 @@
         },
       });
 
-      var Tea = Beverage({
+      let Tea = Beverage({
         brew: function () {
           console.log("用沸水浸泡茶叶");
         },
@@ -62,9 +62,9 @@
         },
       });
 
-      var coffee = new Coffee();
+      let coffee = new Coffee();
       coffee.init();
-      var tea = new Tea();
+      let tea = new Tea();
       tea.init();
     </script>
   </body>

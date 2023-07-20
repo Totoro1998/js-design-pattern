@@ -52,13 +52,13 @@
       /**
        * render 函数和 bindEvent 函数都分别执行了 3 次，但 div 实际上只被绑定了一个事件。
        */
-      var bindEvent = getSingle(function () {
+      let bindEvent = getSingle(function () {
         document.getElementById("div1").onclick = function () {
           alert("click");
         };
         return true;
       });
-      var render = function () {
+      let render = function () {
         console.log("开始渲染列表");
         bindEvent();
       };

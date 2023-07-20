@@ -7,8 +7,8 @@
   </head>
   <body>
     <!-- <script>
-      var myImage = (function () {
-        var imgNode = document.createElement("img");
+      let myImage = (function () {
+        let imgNode = document.createElement("img");
         document.body.appendChild(imgNode);
         return {
           setSrc: function (src) {
@@ -22,8 +22,8 @@
     </script> -->
 
     <script>
-      var myImage = (function () {
-        var imgNode = document.createElement("img");
+      let myImage = (function () {
+        let imgNode = document.createElement("img");
         document.body.appendChild(imgNode);
         return {
           setSrc: function (src) {
@@ -37,8 +37,8 @@
        * 并且在此过程中加入一些额外的操作，比如在真正的图片加载好之前，
        * 先把 img 节点的 src 设置为一张本地的 loading 图片
        */
-      var proxyImage = (function () {
-        var img = new Image();
+      let proxyImage = (function () {
+        let img = new Image();
         img.onload = function () {
           myImage.setSrc(this.src);
         };

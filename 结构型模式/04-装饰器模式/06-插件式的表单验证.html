@@ -12,7 +12,7 @@
   </body>
   <script>
     Function.prototype.before = function (beforefn) {
-      var __self = this;
+      let __self = this;
       return function () {
         if (beforefn.apply(this, arguments) === false) {
           // beforefn 返回 false 的情况直接 return，不再执行后面的原函数
@@ -24,7 +24,7 @@
   </script>
 
   <script>
-    var validata = function () {
+    let validata = function () {
       if (username.value === "") {
         alert("用户名不能为空");
         return false;
@@ -35,8 +35,8 @@
       }
     };
 
-    var formSubmit = function () {
-      var param = {
+    let formSubmit = function () {
+      let param = {
         username: username.value,
         password: password.value,
       };
@@ -55,7 +55,7 @@
      * 代码如下：
      */
 
-    var func = function () {
+    let func = function () {
       alert(1);
     };
     func.a = "a";

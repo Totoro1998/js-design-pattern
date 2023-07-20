@@ -11,8 +11,8 @@
         console.log(state); // 可能为 sign、 uploading、 done、 error
       };
 
-      var plugin = (function () {
-        var plugin = document.createElement("embed");
+      let plugin = (function () {
+        let plugin = document.createElement("embed");
         plugin.style.display = "none";
         plugin.type = "application/txftn-webkit";
         plugin.sign = function () {
@@ -34,7 +34,7 @@
         return plugin;
       })();
 
-      var Upload = function (fileName) {
+      let Upload = function (fileName) {
         this.plugin = plugin;
         this.fileName = fileName;
         this.button1 = null;
@@ -57,7 +57,7 @@
       };
 
       Upload.prototype.bindEvent = function () {
-        var self = this;
+        let self = this;
         this.button1.onclick = function () {
           if (self.state === "sign") {
             // 扫描状态下，任何操作无效
@@ -122,7 +122,7 @@
     </script>
 
     <script>
-      var uploadObj = new Upload("JavaScript 设计模式与开发实践");
+      let uploadObj = new Upload("JavaScript 设计模式与开发实践");
       uploadObj.init();
       window.external.upload = function (state) {
         // 插件调用 JavaScript 的方法

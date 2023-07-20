@@ -7,8 +7,8 @@
   </head>
   <body>
     <script>
-      var Event = (function () {
-        var clientList = {},
+      let Event = (function () {
+        let clientList = {},
           listen,
           trigger,
           remove;
@@ -19,25 +19,25 @@
           clientList[key].push(fn);
         };
         trigger = function () {
-          var key = Array.prototype.shift.call(arguments),
+          let key = Array.prototype.shift.call(arguments),
             fns = clientList[key];
           if (!fns || fns.length === 0) {
             return false;
           }
-          for (var i = 0, fn; (fn = fns[i++]); ) {
+          for (let i = 0, fn; (fn = fns[i++]); ) {
             fn.apply(this, arguments);
           }
         };
         remove = function (key, fn) {
-          var fns = clientList[key];
+          let fns = clientList[key];
           if (!fns) {
             return false;
           }
           if (!fn) {
             fns && (fns.length = 0);
           } else {
-            for (var l = fns.length - 1; l >= 0; l--) {
-              var _fn = fns[l];
+            for (let l = fns.length - 1; l >= 0; l--) {
+              let _fn = fns[l];
               if (_fn === fn) {
                 fns.splice(l, 1);
               }

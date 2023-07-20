@@ -16,8 +16,8 @@
        * 或者消息会流向哪些模块，这又会给我们的维护带来一些麻烦，也许某个模块的作用就是暴露一些接口给其他模块调用。
        */
 
-      var Event = (function () {
-        var clientList = {},
+      let Event = (function () {
+        let clientList = {},
           listen,
           trigger,
           remove;
@@ -28,25 +28,25 @@
           clientList[key].push(fn);
         };
         trigger = function () {
-          var key = Array.prototype.shift.call(arguments),
+          let key = Array.prototype.shift.call(arguments),
             fns = clientList[key];
           if (!fns || fns.length === 0) {
             return false;
           }
-          for (var i = 0, fn; (fn = fns[i++]); ) {
+          for (let i = 0, fn; (fn = fns[i++]); ) {
             fn.apply(this, arguments);
           }
         };
         remove = function (key, fn) {
-          var fns = clientList[key];
+          let fns = clientList[key];
           if (!fns) {
             return false;
           }
           if (!fn) {
             fns && (fns.length = 0);
           } else {
-            for (var l = fns.length - 1; l >= 0; l--) {
-              var _fn = fns[l];
+            for (let l = fns.length - 1; l >= 0; l--) {
+              let _fn = fns[l];
               if (_fn === fn) {
                 fns.splice(l, 1);
               }
@@ -66,16 +66,16 @@
       Event.trigger("squareMeter88", 2000000); // 售楼处发布消息
     </script>
     <script>
-      var a = (function () {
-        var count = 0;
-        var button = document.getElementById("count");
+      let a = (function () {
+        let count = 0;
+        let button = document.getElementById("count");
         button.onclick = function () {
           Event.trigger("add", count++);
         };
       })();
 
-      var b = (function () {
-        var div = document.getElementById("show");
+      let b = (function () {
+        let div = document.getElementById("show");
         Event.listen("add", function (count) {
           div.innerHTML = count;
         });

@@ -18,11 +18,11 @@
         <input type="checkbox" id="9"></input>9
     </div>
     <script>
-      var synchronousFile = function (id) {
+      let synchronousFile = function (id) {
         console.log("开始同步文件， id 为: " + id);
       };
-      var proxySynchronousFile = (function () {
-        var cache = [], // 保存一段时间内需要同步的 ID
+      let proxySynchronousFile = (function () {
+        let cache = [], // 保存一段时间内需要同步的 ID
           timer; // 定时器
         return function (id) {
           cache.push(id);
@@ -38,8 +38,8 @@
           }, 2000);
         };
       })();
-      var checkbox = document.getElementsByTagName("input");
-      for (var i = 0, c; (c = checkbox[i++]); ) {
+      let checkbox = document.getElementsByTagName("input");
+      for (let i = 0, c; (c = checkbox[i++]); ) {
         c.onclick = function () {
           if (this.checked === true) {
             proxySynchronousFile(this.id);

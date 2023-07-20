@@ -12,28 +12,28 @@
       <button id="button3">点击按钮 3</button>
     </div>
     <script>
-      var button1 = document.getElementById("button1");
-      var button2 = document.getElementById("button2");
-      var button3 = document.getElementById("button3");
+      let button1 = document.getElementById("button1");
+      let button2 = document.getElementById("button2");
+      let button3 = document.getElementById("button3");
 
-      var MenuBar = {
+      let MenuBar = {
         refresh: function () {
           console.log("刷新菜单目录");
         },
       };
-      var RefreshMenuBarCommand = function (receiver) {
+      let RefreshMenuBarCommand = function (receiver) {
         return {
           execute: function () {
             receiver.refresh();
           },
         };
       };
-      var setCommand = function (button, command) {
+      let setCommand = function (button, command) {
         button.onclick = function () {
           command.execute();
         };
       };
-      var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
+      let refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
       setCommand(button1, refreshMenuBarCommand);
     </script>
   </body>
