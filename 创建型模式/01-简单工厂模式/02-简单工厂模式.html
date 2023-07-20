@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    class WoodenDoor {
+      constructor(width, height) {
+        this.width = width;
+        this.height = height;
+      }
+
+      getWidth() {
+        return this.width;
+      }
+
+      getHeight() {
+        return this.height;
+      }
+    }
+  </script>
+  <script>
+    const DoorFactory = {
+      makeDoor: (width, height) => new WoodenDoor(width, height),
+    };
+
+    const door = DoorFactory.makeDoor(100, 200);
+    console.log("Width:", door.getWidth());
+    console.log("Height:", door.getHeight());
+  </script>
+</html>
