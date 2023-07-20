@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    // 访问者接口
+    class Visitor {
+      visitHeading(element) {}
+      visitParagraph(element) {}
+      visitLink(element) {}
+    }
+
+    // 元素接口
+    class Element {
+      accept(visitor) {}
+    }
+
+    // Heading元素
+    class Heading extends Element {
+      accept(visitor) {
+        visitor.visitHeading(this);
+      }
+    }
+
+    // Paragraph元素
+    class Paragraph extends Element {
+      accept(visitor) {
+        visitor.visitParagraph(this);
+      }
+    }
+
+    // Link元素
+    class Link extends Element {
+      accept(visitor) {
+        visitor.visitLink(this);
+      }
+    }
+
+    // 具体的访问者
+    class ConcreteVisitor extends Visitor {
+      visitHeading(element) {
+        console.log("处理标题:", element);
+      }
+
+      visitParagraph(element) {
+        console.log("处理段落:", element);
+      }
+
+      visitLink(element) {
+        console.log("处理链接:", element);
+      }
+    }
+  </script>
+
+  <script>
+    const heading = new Heading();
+    const paragraph = new Paragraph();
+    const link = new Link();
+
+    const elements = [heading, paragraph, link];
+
+    const visitor = new ConcreteVisitor();
+
+    elements.forEach((element) => element.accept(visitor));
+  </script>
+</html>

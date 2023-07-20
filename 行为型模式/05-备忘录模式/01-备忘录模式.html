@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    // 发起者
+    // 是要保存状态的对象
+    class Editor {
+      constructor() {
+        this.content = "";
+      }
+
+      type(text) {
+        this.content += text;
+      }
+
+      save() {
+        return new Memento(this.content);
+      }
+
+      restore(memento) {
+        this.content = memento.getState();
+      }
+    }
+
+    // 备忘录
+    // 存储原始对象状态的对象
+    class Memento {
+      constructor(content) {
+        this.content = content;
+      }
+
+      getState() {
+        return this.content;
+      }
+    }
+
+    // 负责人
+    // 管理备忘录的对象
+    class History {
+      constructor() {
+        this.history = [];
+      }
+      push(memento) {
+        this.history.push(memento);
+      }
+      pop() {
+        return this.history.pop();
+      }
+    }
+  </script>
+
+  <script>
+    // 测试
+    const editor = new Editor();
+    const history = new History();
+
+    editor.type("Hello, "); // Typing some content
+    history.push(editor.save()); // Save the state
+
+    editor.type("world!"); // Typing more content
+    console.log(editor.content); // Output: Hello, world!
+
+    editor.restore(history.pop()); // Restore to the previous state
+    console.log(editor.content); // Output: Hello,
+  </script>
+</html>
