@@ -7,16 +7,6 @@
   </head>
   <body>
     <script>
-      let id = 0;
-      window.startUpload = function (uploadType, files) {
-        // uploadType 区分是控件还是 flash
-        for (let i = 0, file; (file = files[i++]); ) {
-          let uploadObj = new Upload(uploadType, file.fileName, file.fileSize);
-          uploadObj.init(id++); // 给 upload 对象设置一个唯一的 id
-        }
-      };
-    </script>
-    <script>
       let Upload = function (uploadType, fileName, fileSize) {
         this.uploadType = uploadType;
         this.fileName = fileName;
@@ -51,6 +41,14 @@
     </script>
 
     <script>
+      let id = 0;
+      window.startUpload = function (uploadType, files) {
+        // uploadType 区分是控件还是 flash
+        for (let i = 0, file; (file = files[i++]); ) {
+          let uploadObj = new Upload(uploadType, file.fileName, file.fileSize);
+          uploadObj.init(id++); // 给 upload 对象设置一个唯一的 id
+        }
+      };
       startUpload("plugin", [
         {
           fileName: "1.txt",

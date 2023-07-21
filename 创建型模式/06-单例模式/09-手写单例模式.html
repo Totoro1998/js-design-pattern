@@ -1,0 +1,18 @@
+<script>
+  const User = (function () {
+    function _user() {
+      this.name = "xm";
+    }
+    return function () {
+      if (!_user.instance) {
+        _user.instance = new _user();
+      }
+      return _user.instance;
+    };
+  })();
+
+  const u1 = new User();
+  const u2 = new User();
+
+  console.log(u1 === u2); // true
+</script>

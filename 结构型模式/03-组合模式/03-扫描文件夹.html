@@ -7,6 +7,7 @@
   </head>
   <body>
     <script>
+      // 文件夹
       let Folder = function (name) {
         this.name = name;
         this.files = [];
@@ -21,6 +22,7 @@
         }
       };
 
+      // 文件
       let File = function (name) {
         this.name = name;
       };
@@ -44,16 +46,12 @@
       folder.add(folder1);
       folder.add(folder2);
       folder.add(file3);
-    </script>
-
-    <script>
       let folder3 = new Folder("Nodejs");
       let file4 = new File("深入浅出 Node.js");
       folder3.add(file4);
       let file5 = new File("JavaScript 语言精髓与编程实践");
       folder.add(folder3);
       folder.add(file5);
-
       folder.scan();
     </script>
   </body>

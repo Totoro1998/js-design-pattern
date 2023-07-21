@@ -24,9 +24,7 @@
           return this.dom.parentNode.removeChild(this.dom);
         }
       };
-    </script>
 
-    <script>
       // 定义一个工厂来创建upload对象
       let UploadFactory = (function () {
         let createdFlyWeightObjs = {};
@@ -43,9 +41,7 @@
           },
         };
       })();
-    </script>
 
-    <script>
       /**
        * uploadManager 对象，它负责向 UploadFactory 提交创建对象的请求，
        * 并用一个 uploadDatabase 对象保存所有 upload 对象的外部状态，
@@ -97,9 +93,6 @@
           );
         }
       };
-    </script>
-
-    <script>
       startUpload("plugin", [
         {
           fileName: "1.txt",

@@ -17,6 +17,7 @@
           // 并且保证 this 不被劫持
         };
       };
+
       Function.prototype.after = function (afterfn) {
         let __self = this;
         return function () {
